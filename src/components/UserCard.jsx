@@ -12,6 +12,7 @@ import phone from "../assets/phone.svg";
 import lock from "../assets/padlock.svg";
 import { Container, Image } from "react-bootstrap";
 import Btn from "./Btn";
+import AddUserTable from "./AddUserTable";
 const UserCard = () => {
   const [user, setuser] = useState(false);
 
@@ -25,8 +26,8 @@ const UserCard = () => {
   }, []);
 
   return (
-    <Card style={{ width: "57%", height: "60%", textAlign: "center" }}>
-      <Card.Header className=" position-relative" style={{ height: "30%" }}>
+    <Card style={{ width: "57%", height: "70%", textAlign: "center" }}>
+      <Card.Header className=" position-relative" style={{ height: "25%" }}>
         <Image
           className=" position-absolute"
           src={user[0]?.picture.large}
@@ -58,6 +59,9 @@ const UserCard = () => {
         <Container className=" d-flex justify-content-center">
             <Btn btnName={"New User"}/>
             <Btn btnName={"Add User"}/>
+        </Container>
+        <Container>
+          <AddUserTable/>
         </Container>
       </Card.Body>
     </Card>

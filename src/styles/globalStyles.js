@@ -7,3 +7,11 @@ export const getButtonStyle = (hover) => ({
     padding: "6px 25px",
     transition: "background 0.3s",
   });
+
+export const tableHeaderStyle = ({
+    background:"#FEC861",
+    color:"#9E4C8D",
+    whiteSpace:"nowrap",
+    padding:"6px 50px",
+    fontWeight:"bold"
+  })
