@@ -11,8 +11,9 @@ import map from "../assets/map.svg";
 import phone from "../assets/phone.svg";
 import lock from "../assets/padlock.svg";
 import { Container, Image } from "react-bootstrap";
+import Btn from "./Btn";
 const UserCard = () => {
-  const [user, setuser] = useState(null);
+  const [user, setuser] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,7 +27,17 @@ const UserCard = () => {
   return (
     <Card style={{ width: "57%", height: "60%", textAlign: "center" }}>
       <Card.Header className=" position-relative" style={{ height: "30%" }}>
-        <Image className=" position-absolute" src={user[0].picture.large} style={{outline:"1px solid gray", border:"5px solid white", top:"30%", left:"42%"}} roundedCircle />
+        <Image
+          className=" position-absolute"
+          src={user[0]?.picture.large}
+          style={{
+            outline: "1px solid gray",
+            border: "5px solid white",
+            top: "30%",
+            left: "42%",
+          }}
+          roundedCircle
+        />
       </Card.Header>
       <Card.Body>
         <Card.Title className=" mt-5">
@@ -44,7 +55,10 @@ const UserCard = () => {
           <SvgIcons icon={phone} />
           <SvgIcons icon={lock} />
         </Container>
-        <Button variant="primary">Go somewhere</Button>
+        <Container className=" d-flex justify-content-center">
+            <Btn btnName={"New User"}/>
+            <Btn btnName={"Add User"}/>
+        </Container>
       </Card.Body>
     </Card>
   );
