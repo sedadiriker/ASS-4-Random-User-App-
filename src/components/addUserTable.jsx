@@ -7,8 +7,8 @@ const AddUserTable = () => {
  
   return (
     <Container className=" d-flex justify-content-center gap-2 mt-3">
-      {headerNames.map((headerName) => (
-        <p style={tableHeaderStyle}>{headerName}</p>
+      {headerNames.map((headerName,index) => (
+        <p key={index} style={tableHeaderStyle}>{headerName}</p>
       ))}
     </Container>
   );

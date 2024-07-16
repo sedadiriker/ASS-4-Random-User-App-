@@ -4,6 +4,7 @@ import Card from "react-bootstrap/Card";
 import { getUser } from "../services/api";
 import SvgIcons from "./SvgIcons";
 import man from "../assets/man.svg";
+import woman from "../assets/woman.svg";
 import mail from "../assets/mail.svg";
 import growingMan from "../assets/growing-up-man.svg";
 import growingWomen from "../assets/growing-up-woman.svg";
@@ -13,16 +14,31 @@ import lock from "../assets/padlock.svg";
 import { Container, Image } from "react-bootstrap";
 import Btn from "./Btn";
 import AddUserTable from "./AddUserTable";
+import axios from "axios";
 const UserCard = () => {
   const [user, setuser] = useState(false);
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const data = await getUser();
+  //     console.log(data[0]);
+  //     setuser(data);
+  //   };
+  //   fetchData();
+  // }, []);
+
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await getUser();
-      console.log(data[0]);
-      setuser(data);
+    const getUser = async () => {
+      const URL = "https://randomuser.me/api/";
+
+      try {
+        const { data } = await axios(URL);
+        setuser(data.results);
+      } catch (error) {
+        console.log(error);
+      }
     };
-    fetchData();
+    getUser();
   }, []);
 
   return (
@@ -48,20 +64,27 @@ const UserCard = () => {
         </Card.Title>
         <Card.Text>{user && user[0].name.first}</Card.Text>
         <Container className="d-flex justify-content-center gap-5">
-          <SvgIcons icon={man} />
+          {user[0]?.gender == "male" ? (
+            <SvgIcons icon={man} />
+          ) : (
+            <SvgIcons icon={woman} />
+          )}
           <SvgIcons icon={mail} />
-          <SvgIcons icon={growingMan} />
+          {user[0]?.gender == "male" ? (
+            <SvgIcons icon={growingMan} />
+          ) : (
+            <SvgIcons icon={growingWomen} />
+          )}
           <SvgIcons icon={map} />
-          <SvgIcons icon={mail} />
           <SvgIcons icon={phone} />
           <SvgIcons icon={lock} />
         </Container>
         <Container className=" d-flex justify-content-center">
-            <Btn btnName={"New User"}/>
-            <Btn btnName={"Add User"}/>
+          <Btn btnName={"New User"} />
+          <Btn btnName={"Add User"} />
         </Container>
         <Container>
-          <AddUserTable/>
+          <AddUserTable />
         </Container>
       </Card.Body>
     </Card>
