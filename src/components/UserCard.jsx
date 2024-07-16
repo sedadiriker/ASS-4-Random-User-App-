@@ -18,15 +18,20 @@ import axios from "axios";
 
 const UserCard = () => {
   const [user, setuser] = useState(false);
+  const [selectedUsers, setSelectedUsers] =useState([])
 
   const fetchData = async () => {
     const data = await getUser();
     setuser(data);
   }
-  
+
   const clickNewUser = () => {  
     fetchData()
    };
+
+   const addUser = () => {
+    setSelectedUsers([...selectedUsers,user[0]])
+   }
 
   useEffect(() => {
     fetchData();
@@ -34,8 +39,8 @@ const UserCard = () => {
 
 
   return (
-    <Card style={{ width: "57%", height: "70%", textAlign: "center" }}>
-      <Card.Header className=" position-relative" style={{ height: "25%" }}>
+    <Card style={{ width: "50rem", textAlign: "center",margin:"1rem" }}>
+      <Card.Header className=" position-relative" style={{ height: "7rem" }}>
         <Image
           className=" position-absolute"
           src={user[0]?.picture.large}
@@ -73,10 +78,10 @@ const UserCard = () => {
         </Container>
         <Container className=" d-flex justify-content-center">
           <Btn onClick={clickNewUser} btnName={"New User"} />
-          <Btn btnName={"Add User"} />
+          <Btn onClick={addUser} btnName={"Add User"} />
         </Container>
         <Container>
-          <AddUserTable />
+          <AddUserTable selectedUsers={selectedUsers} />
         </Container>
       </Card.Body>
     </Card>

@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <Container
       className="d-flex justify-content-center align-items-center"
-      style={{ height: "100vh", width: "100vw" }}
+      style={{minHeight:"100vh",width: "100vw" }}
     >
       {loading ? <Loading /> : <UserCard />}
     </Container>

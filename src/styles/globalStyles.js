@@ -13,5 +13,5 @@ export const tableHeaderStyle = ({
     color:"#9E4C8D",
     whiteSpace:"nowrap",
     padding:"6px 50px",
-    fontWeight:"bold"
+    fontWeight:"bold",
   })
