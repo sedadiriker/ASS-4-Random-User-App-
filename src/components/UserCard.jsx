@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { getUser } from "../services/api";
 import SvgIcons from "./SvgIcons";
@@ -14,7 +13,7 @@ import lock from "../assets/padlock.svg";
 import { Container, Image } from "react-bootstrap";
 import Btn from "./Btn";
 import AddUserTable from "./AddUserTable";
-import axios from "axios";
+import { toastErrorNotify,toastSuccessNotify } from "../helper/Toastify";
 
 const UserCard = () => {
   const [user, setuser] = useState(false);
@@ -30,7 +29,12 @@ const UserCard = () => {
    };
 
    const addUser = () => {
-    setSelectedUsers([...selectedUsers,user[0]])
+    if(selectedUsers.includes(user[0])) {
+      toastErrorNotify("Bu kullanıcı zaten listede var !!")
+    }else{
+      setSelectedUsers([...selectedUsers,user[0]])
+      toastSuccessNotify("Kullanıcı başarıyla eklendi.")
+    }
    }
 
   useEffect(() => {
