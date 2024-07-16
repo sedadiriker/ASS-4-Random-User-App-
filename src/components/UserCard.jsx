@@ -19,28 +19,19 @@ import axios from "axios";
 const UserCard = () => {
   const [user, setuser] = useState(false);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const data = await getUser();
-  //     console.log(data[0]);
-  //     setuser(data);
-  //   };
-  //   fetchData();
-  // }, []);
+  const fetchData = async () => {
+    const data = await getUser();
+    setuser(data);
+  }
+  
+  const clickNewUser = () => {  
+    fetchData()
+   };
 
   useEffect(() => {
-    const getUser = async () => {
-      const URL = "https://randomuser.me/api/";
-
-      try {
-        const { data } = await axios(URL);
-        setuser(data.results);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getUser();
+    fetchData();
   }, []);
+
 
   return (
     <Card style={{ width: "57%", height: "70%", textAlign: "center" }}>
@@ -81,7 +72,7 @@ const UserCard = () => {
           <SvgIcons icon={lock} />
         </Container>
         <Container className=" d-flex justify-content-center">
-          <Btn btnName={"New User"} />
+          <Btn onClick={clickNewUser} btnName={"New User"} />
           <Btn btnName={"Add User"} />
         </Container>
         <Container>

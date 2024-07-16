@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { getButtonStyle } from "../styles/globalStyles";
 
-const Btn = ({ btnName }) => {
+const Btn = ({ btnName,onClick }) => {
   const [hover, sethover] = useState(false);
 
   return (
@@ -10,6 +10,7 @@ const Btn = ({ btnName }) => {
       style={getButtonStyle(hover)}
       onMouseEnter={() => sethover(true)}
       onMouseLeave={() => sethover(false)}
+      onClick={onClick}
     >
       {btnName}
     </Button>
