@@ -3,15 +3,18 @@ export const getButtonStyle = (hover) => ({
     color: hover ? "black" : "white",
     textTransform: "uppercase",
     border: "none",
-    margin: "24px 96px 0 96px",
-    padding: "6px 25px",
+    padding: "6px 2.5rem",
     transition: "background 0.3s",
+    whiteSpace:"nowrap",
+    marginTop:"2rem"
   });
 
 export const tableHeaderStyle = ({
     background:"#FEC861",
     color:"#9E4C8D",
     whiteSpace:"nowrap",
-    padding:"6px 50px",
+    padding:"6px 1px",
     fontWeight:"bold",
+    maxWidth:"5rem",
+    fontSize:"12px"
   })

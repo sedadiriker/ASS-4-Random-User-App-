@@ -6,8 +6,7 @@ const AddUserTable = ({ selectedUsers }) => {
   const headerNames = ["FirstName", "Email", "Phone", "Age"];
   console.log(selectedUsers);
   return (
-    <Container className="mt-3 ">
-      <Table striped bordered hover style={{width:"100%",borderSpacing:"10px"}} >
+      <Table striped bordered hover style={{width:"100%", marginTop:"1rem"}} >
         <thead>
           <tr>
             {headerNames.map((headerName, index) => (
@@ -15,9 +14,9 @@ const AddUserTable = ({ selectedUsers }) => {
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody className="w-100">
           {selectedUsers.map((user,index) => (
-            <tr style={{fontSize: "14px", backgroundColor:"white"}}>
+            <tr style={{fontSize: "14px"}}>
               <td>{user.name.first}</td>
               <td>{user.email}</td>
               <td>{user.phone}</td>
@@ -26,7 +25,6 @@ const AddUserTable = ({ selectedUsers }) => {
           ))}
         </tbody>
       </Table>
-    </Container>
   );
 };
 

@@ -34,14 +34,14 @@ const UserCard = () => {
       value: user[0]?.dob.age,
     },
     { icon: map, text: "My street is", value: user[0]?.location.street?.name },
-    { icon: phone, text: "My phone is", value:user[0]?.phone },
-    { icon: lock, text: "My password is", value:user[0]?.login.password },
+    { icon: phone, text: "My phone is", value: user[0]?.phone },
+    { icon: lock, text: "My password is", value: user[0]?.login.password },
   ];
 
   const fetchData = async () => {
     const data = await getUser();
     setuser(data);
-    setText(data[0].name.first + ' ' + data[0].name.last)
+    setText(data[0].name.first + " " + data[0].name.last);
   };
 
   const clickNewUser = () => {
@@ -63,18 +63,17 @@ const UserCard = () => {
 
   return (
     <Card style={{ width: "50rem", textAlign: "center", margin: "1rem" }}>
-      <Card.Header className=" position-relative" style={{ height: "7rem" }}>
-        <Image
-          className=" position-absolute"
-          src={user[0]?.picture.large}
-          style={{
-            outline: "1px solid gray",
-            border: "5px solid white",
-            top: "30%",
-            left: "42%",
-          }}
-          roundedCircle
-        />
+      <Card.Header style={{ height: "7rem" }}>
+        <div className="d-flex justify-content-center">
+          <Image
+            src={user[0]?.picture.large}
+            style={{
+              outline: "1px solid gray",
+              border: "5px solid white",
+            }}
+            roundedCircle
+          />
+        </div>
       </Card.Header>
       <Card.Body>
         <Card.Title className=" mt-5">
@@ -83,7 +82,7 @@ const UserCard = () => {
           </p>
         </Card.Title>
         <Card.Text className=" fs-2">{text}</Card.Text>
-        <Container className="d-flex justify-content-center gap-5">
+        <Container className="d-flex justify-content-center">
           {icons.map((item, index) => (
             <div
               key={index}
@@ -91,19 +90,23 @@ const UserCard = () => {
                 setIconTıtle(item.text);
                 setText(item.value);
               }}
-              style={{cursor:"pointer"}} 
+              style={{
+                cursor: "pointer",
+                display: "flex",
+                justifyContent:"center",
+                padding: "2px",
+                flex: "1"
+              }}
             >
               <SvgIcons icon={item.icon} />
             </div>
           ))}
         </Container>
-        <Container className=" d-flex justify-content-center">
+        <Container className=" d-flex justify-content-center gap-lg-5">
           <Btn onClick={clickNewUser} btnName={"New User"} />
           <Btn onClick={addUser} btnName={"Add User"} />
         </Container>
-        <Container>
           <AddUserTable selectedUsers={selectedUsers} />
-        </Container>
       </Card.Body>
     </Card>
   );
