@@ -13,37 +13,49 @@ import lock from "../assets/padlock.svg";
 import { Container, Image } from "react-bootstrap";
 import Btn from "./Btn";
 import AddUserTable from "./AddUserTable";
-import { toastErrorNotify,toastSuccessNotify } from "../helper/Toastify";
+import { toastErrorNotify, toastSuccessNotify } from "../helper/Toastify";
+
 
 const UserCard = () => {
   const [user, setuser] = useState(false);
-  const [selectedUsers, setSelectedUsers] =useState([])
+  const [selectedUsers, setSelectedUsers] = useState([]);
+
+  const icons = [
+    { icon: user[0]?.gender === "male" ? man : woman },
+    { icon: mail },
+    { icon: user[0]?.gender === "male" ? growingMan : growingWomen },
+    { icon: map },
+    { icon: phone },
+    { icon: lock },
+  ];
+  
 
   const fetchData = async () => {
     const data = await getUser();
     setuser(data);
-  }
+  };
 
-  const clickNewUser = () => {  
-    fetchData()
-   };
+  const clickNewUser = () => {
+    fetchData();
+  };
 
-   const addUser = () => {
-    if(selectedUsers.includes(user[0])) {
-      toastErrorNotify("Bu kullanıcı zaten listede var !!")
-    }else{
-      setSelectedUsers([...selectedUsers,user[0]])
-      toastSuccessNotify("Kullanıcı başarıyla eklendi.")
+  const addUser = () => {
+    if (selectedUsers.includes(user[0])) {
+      toastErrorNotify("Bu kullanıcı zaten listede var !!");
+    } else {
+      setSelectedUsers([...selectedUsers, user[0]]);
+      toastSuccessNotify("Kullanıcı başarıyla eklendi.");
     }
-   }
+  };
+
+  const mouseOverText = () => {};
 
   useEffect(() => {
     fetchData();
   }, []);
 
-
   return (
-    <Card style={{ width: "50rem", textAlign: "center",margin:"1rem" }}>
+    <Card style={{ width: "50rem", textAlign: "center", margin: "1rem" }}>
       <Card.Header className=" position-relative" style={{ height: "7rem" }}>
         <Image
           className=" position-absolute"
@@ -65,20 +77,9 @@ const UserCard = () => {
         </Card.Title>
         <Card.Text>{user && user[0].name.first}</Card.Text>
         <Container className="d-flex justify-content-center gap-5">
-          {user[0]?.gender == "male" ? (
-            <SvgIcons icon={man} />
-          ) : (
-            <SvgIcons icon={woman} />
-          )}
-          <SvgIcons icon={mail} />
-          {user[0]?.gender == "male" ? (
-            <SvgIcons icon={growingMan} />
-          ) : (
-            <SvgIcons icon={growingWomen} />
-          )}
-          <SvgIcons icon={map} />
-          <SvgIcons icon={phone} />
-          <SvgIcons icon={lock} />
+          {icons.map((item, index) => (
+            <SvgIcons key={index} icon={item.icon} />
+          ))}
         </Container>
         <Container className=" d-flex justify-content-center">
           <Btn onClick={clickNewUser} btnName={"New User"} />
