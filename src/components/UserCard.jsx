@@ -19,9 +19,7 @@ const UserCard = () => {
   const [user, setuser] = useState(false);
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [ıconTıtle, setIconTıtle] = useState("My name is");
-  const [text, setText] = useState(user[0]?.name?.first);
-
-  console.log(user);
+  const [text, setText] = useState("");
 
   const icons = [
     {
@@ -43,6 +41,7 @@ const UserCard = () => {
   const fetchData = async () => {
     const data = await getUser();
     setuser(data);
+    setText(data[0].name.first + ' ' + data[0].name.last)
   };
 
   const clickNewUser = () => {
